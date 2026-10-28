@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Compaction Threshold Control",
+    "description": "Adjust the automatic context-compaction threshold (20%–80%) beside the composer, live, without restarting or editing Config."
+  }
+}

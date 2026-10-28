@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax check
+        run: |
+          node --check index.js
+          node --check client.js
+      - name: Validate manifest and resources
+        run: |
+          node --input-type=module -e "import { readFileSync } from 'node:fs'; const p = JSON.parse(readFileSync('package.json', 'utf8')); if (!p.dsh?.bundle?.patch) throw new Error('dsh.bundle.patch is required'); if (!p.exports?.['./client']) throw new Error('exports[\"./client\"] is required'); if (!p.exports?.['./locale/*.json'] || !p.exports?.['./icon']) throw new Error('display resources are not exported'); console.log('manifest ok');"
+      - name: Validate locale JSON
+        run: |
+          node --input-type=module -e "import { readFileSync } from 'node:fs'; for (const file of ['locale/en.json','locale/zh.json']) JSON.parse(readFileSync(file, 'utf8')); console.log('locales ok');"

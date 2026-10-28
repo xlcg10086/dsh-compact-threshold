@@ -1,0 +1,4 @@
+- insert:
+    - id: compact-control
+      name: 'dsh-compact-threshold'
+      config: {}

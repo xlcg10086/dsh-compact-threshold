@@ -1,0 +1,77 @@
+{
+  "name": "dsh-compact-threshold",
+  "version": "1.0.0",
+  "description": "Live context-compaction threshold control (20%–80%) for the DeepSeek Harness composer. Adjust it without restarting DSH; lowering it below current usage triggers compaction immediately when idle.",
+  "license": "MIT",
+  "author": "xlcg10086",
+  "homepage": "https://github.com/xlcg10086/dsh-compact-threshold#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xlcg10086/dsh-compact-threshold.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xlcg10086/dsh-compact-threshold/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "compaction",
+    "context-window",
+    "context-management",
+    "plugin"
+  ],
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "assets/icon-256.png",
+    "assets/screenshot.png",
+    "screenshots.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "^3.18.5",
+    "react": "^18.3.1 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22.19.0",
+    "dsh": ">=0.2.1-rc.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
